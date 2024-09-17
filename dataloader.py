@@ -115,30 +115,3 @@ class dirichletLoader(customDataLoader):
             for j in range(self.size):
                 partition_list[j] += part_list[j]
         return partition_list
-
-
-if __name__ == '__main__':
-    from torchvision import datasets, transforms
-
-    dataset = datasets.MNIST('./data',
-                             train=True,
-                             download=True,
-                             transform=transforms.Compose([transforms.ToTensor(),
-                                                           transforms.Normalize((0.1307,), (0.3081,))]))
-    loader = iidLoader(10, dataset)
-    print(f"\nInitialized {len(loader)} loaders, each with batch size {loader.bsz}.\
-    \nThe size of dataset in each loader are:")
-    print([len(loader[i].dataset) for i in range(len(loader))])
-    print(f"Total number of data: {sum([len(loader[i].dataset) for i in range(len(loader))])}")
-
-    loader = byLabelLoader(10, dataset)
-    print(f"\nInitialized {len(loader)} loaders, each with batch size {loader.bsz}.\
-    \nThe size of dataset in each loader are:")
-    print([len(loader[i].dataset) for i in range(len(loader))])
-    print(f"Total number of data: {sum([len(loader[i].dataset) for i in range(len(loader))])}")
-
-    loader = dirichletLoader(10, dataset, alpha=0.9)
-    print(f"\nInitialized {len(loader)} loaders, each with batch size {loader.bsz}.\
-    \nThe size of dataset in each loader are:")
-    print([len(loader[i].dataset) for i in range(len(loader))])
-    print(f"Total number of data: {sum([len(loader[i].dataset) for i in range(len(loader))])}")
