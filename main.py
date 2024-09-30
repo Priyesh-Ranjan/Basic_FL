@@ -1,6 +1,8 @@
 from utils.allocateGPU import *
-
-allocate_gpu()
+try :
+    allocate_gpu()
+except:
+    print("Not using GPU")
 
 import parser
 import _main
